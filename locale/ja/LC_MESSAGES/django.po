@@ -1,0 +1,114 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-18 14:25+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: data_process/settings.py:126
+msgid "Japanese"
+msgstr "日本語"
+
+#: data_process/settings.py:127
+msgid "English"
+msgstr "英語"
+
+#: process/forms.py:23
+msgid "Upload"
+msgstr "アップロード"
+
+#: process/forms.py:28
+msgid "動画ファイルが必要です。"
+msgstr "動画ファイルが必要です。"
+
+#: process/forms.py:30 process/forms.py:45
+msgid "サポートされていないファイル形式が含まれています。"
+msgstr "サポートされていないファイル形式が含まれています。"
+
+#: process/forms.py:40
+msgid "アップロードできる画像は200枚までです。"
+msgstr "アップロードできる画像は200枚までです。"
+
+#: process/forms.py:42
+msgid "画像ファイルが必要です。"
+msgstr "画像ファイルが必要です。"
+
+#: process/forms.py:55 process/forms.py:87
+msgid "トリミングの幅は正の整数である必要があります。"
+msgstr "トリミングの幅は正の整数である必要があります。"
+
+#: process/forms.py:61 process/forms.py:93
+msgid "トリミングの高さは正の整数である必要があります。"
+msgstr "トリミングの高さは正の整数である必要があります。"
+
+#: templates/base.html:7 templates/base.html:51 templates/process/upload.html:7
+
+msgid "Image Batch Processer For NeRF and GSplat or Others"
+msgstr "NeRFとGSplatおよびその他諸々のための画像一括処理機"
+
+#: templates/process/colmap.html:6 templates/process/remove.html:7
+#: templates/process/resize.html:7 templates/process/trimme.html:7
+#: templates/process/video.html:7
+msgid "Download"
+msgstr "実行結果のファイルをダウンロード"
+
+#: templates/process/upload.html:159
+msgid "Image Batch Processor For NeRF and GSplat or Others"
+msgstr "NeRFとGSplatおよびその他諸々のための画像一括処理機"
+
+#: templates/process/upload.html:165
+msgid "Make images from video"
+msgstr "動画から画像を抽出"
+
+#: templates/process/upload.html:174
+msgid "Trim images"
+msgstr "トリミング"
+
+#: templates/process/upload.html:176 templates/process/upload.html:203
+msgid "Width"
+msgstr "横幅"
+
+#: templates/process/upload.html:177 templates/process/upload.html:204
+msgid "Height"
+msgstr "縦幅"
+
+#: templates/process/upload.html:189
+msgid "Remove the background from images or get an alpha mask"
+msgstr "背景除去"
+
+#: templates/process/upload.html:194
+msgid "Model"
+msgstr "モデル"
+
+#: templates/process/upload.html:195
+msgid "Only mask"
+msgstr "マスクのみ"
+
+#: templates/process/upload.html:196
+msgid "Alpha Matting"
+msgstr "アルファマッチング"
+
+#: templates/process/upload.html:201
+msgid "Resize images and Convert RGBA to RGB"
+msgstr "リサイズとRGBAをRGBに変換"
+
+#: templates/process/upload.html:212
+msgid "Convert RGBA to RGB"
+msgstr "RGBAをRGBに変換"
+
+#: templates/process/upload.html:217
+msgid "Camera parameter estimation and sparse point cloud generation by COLMAP"
+msgstr "COLMAPによるカメラパラメータ推定と疎らな点群生成"

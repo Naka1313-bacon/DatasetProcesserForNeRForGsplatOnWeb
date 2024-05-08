@@ -1,0 +1,114 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-18 14:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: data_process/settings.py:126
+msgid "Japanese"
+msgstr "Japanese"
+
+#: data_process/settings.py:127
+msgid "English"
+msgstr "English"
+
+#: process/forms.py:23
+msgid "Upload"
+msgstr "Upload"
+
+#: process/forms.py:28
+msgid "動画ファイルが必要です。"
+msgstr "Please upload video file"
+
+#: process/forms.py:30 process/forms.py:45
+msgid "サポートされていないファイル形式が含まれています。"
+msgstr "The file is not supported"
+
+#: process/forms.py:40
+msgid "アップロードできる画像は200枚までです。"
+msgstr "You can upload up to 200 images."
+
+#: process/forms.py:42
+msgid "画像ファイルが必要です。"
+msgstr "Please upload image files"
+
+#: process/forms.py:55 process/forms.py:87
+msgid "トリミングの幅は正の整数である必要があります。"
+msgstr "The number is invalid"
+
+#: process/forms.py:61 process/forms.py:93
+msgid "トリミングの高さは正の整数である必要があります。"
+msgstr "The number is invalid"
+
+#: templates/base.html:6 templates/base.html:50 templates/process/upload.html:7
+msgid "Image Batch Processer For NeRF and GSplat or Others"
+msgstr "Image Batch Processor For NeRF and GSplat or Others"
+
+#: templates/process/colmap.html:6 templates/process/remove.html:7
+#: templates/process/resize.html:7 templates/process/trimme.html:7
+#: templates/process/video.html:7
+msgid "Download"
+msgstr "Download"
+
+#: templates/process/upload.html:159
+msgid "Image Batch Processor For NeRF and GSplat or Others"
+msgstr "Image Batch Processor For NeRF and GSplat or Others"
+
+#: templates/process/upload.html:165
+msgid "Make images from video"
+msgstr "Make images from video"
+
+#: templates/process/upload.html:174
+msgid "Trim images"
+msgstr "Trim images"
+
+#: templates/process/upload.html:176 templates/process/upload.html:203
+msgid "Width"
+msgstr "Width"
+
+#: templates/process/upload.html:177 templates/process/upload.html:204
+msgid "Height"
+msgstr "Height"
+
+#: templates/process/upload.html:189
+msgid "Remove the background from images or get an alpha mask"
+msgstr "Remove the background from images or get an alpha mask"
+
+#: templates/process/upload.html:194
+msgid "Model"
+msgstr "Model"
+
+#: templates/process/upload.html:195
+msgid "Only mask"
+msgstr "Only mask"
+
+#: templates/process/upload.html:196
+msgid "Alpha Matting"
+msgstr "Alpha Matting"
+
+#: templates/process/upload.html:201
+msgid "Resize images and Convert RGBA to RGB"
+msgstr "Resize images and Convert RGBA to RGB"
+
+#: templates/process/upload.html:212
+msgid "Convert RGBA to RGB"
+msgstr "Convert RGBA to RGB"
+
+#: templates/process/upload.html:217
+
+msgid "Camera parameter estimation and sparse point cloud generation by COLMAP"
+msgstr "Camera parameter estimation and sparse point cloud generation by COLMAP"

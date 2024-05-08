@@ -1,0 +1,1 @@
+*/5 * * * * cd /workspaces/data_process && /usr/local/bin/python manage.py delete_old_files

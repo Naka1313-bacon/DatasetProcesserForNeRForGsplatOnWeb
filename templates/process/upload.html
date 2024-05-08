@@ -1,0 +1,266 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans 'Image Batch Processer For NeRF and GSplat or Others' %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        #language-switcher {
+            position: relative; 
+            top: 0; 
+            left: 0; 
+            padding: 10px;
+            background-color: #ffffff;
+            border-bottom-left-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+            height: 10%;
+            
+        }
+        #language-switcher form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin: 0; 
+            padding: 0; 
+        }
+        #language-switcher select {
+            margin-bottom: 10px;
+        }
+
+        #django-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 600px; /* 最大幅を設定しておく */
+            
+        }
+
+        h2, h3, h4 {
+            color: #333;
+            text-align: center;/* タイトルを中央寄せ */
+        }
+        h4 {
+            margin: auto;
+        }
+
+        label {
+            width: 100%;
+        }
+        .django select {
+            width: 100%; /* フル幅 */
+            padding: 10px;
+            margin: 10px 0;
+            align-self: center; 
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; 
+        }
+        .django button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            align-self: center; 
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* ボーダーとパディングを幅に含める */
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        .django input {
+            width: 100%; /* フル幅 */
+            padding: 10px;
+            margin: 10px 0;
+            align-self: center; 
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .django {
+            margin-bottom: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .error {
+            color: red; /* エラーメッセージのスタイル */
+            margin-top: 5px;
+        }
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 40px;
+            height: 40px;
+            -webkit-animation: spin 2s linear infinite; /* Safari */
+            animation: spin 2s linear infinite;
+            position: fixed; /* 画面の中央に配置 */
+            left: 50%;
+            top: 50%;
+            margin-left: -60px; /* 要素の幅の半分 */
+            margin-top: -60px; /* 要素の高さの半分 */
+            display: none; /* デフォルトでは非表示 */
+          }
+          
+          #footer {
+             margin-top: 10%;
+             margin-bottom: 10%;
+             display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+          }
+
+          /* スピンアニメーション */
+          @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+          }
+          
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+    </style>
+</head>
+<body>
+
+<div class="loader" id="loader"></div>
+
+<div>
+    <div id="'language-switcher">
+        <form action="{% url 'set_language' %}" method="post">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ redirect_to }}" />
+            <select name="language">
+                <option value="en"{% if request.LANGUAGE_CODE == 'en' %} selected{% endif %}>English</option>
+                <option value="ja"{% if request.LANGUAGE_CODE == 'ja' %} selected{% endif %}>日本語</option>
+            </select>
+            <input type="submit" value="Change" />
+        </form>
+    </div>
+<div id="container">
+<h2>{% trans 'Image Batch Processor For NeRF and GSplat or Others' %}</h2>
+
+<form id="django-form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <div id="video" class="django">
+        <h3>{% trans 'Make images from video' %}</h3>
+        {{ videoform.video }}
+        {% if videoform.video.errors %}
+        <div class="error">{{ videoform.video.errors }}</div>
+        {% endif %}
+        <button type="submit" name="action" value='run_video' class="action-button">Run</button>
+    </div>
+    
+    <div id="trim" class="django">
+        <h3>{% trans 'Trim images' %}</h3>
+        {{ trimform.images }}
+        <label><h4>{% trans 'Top' %}</h4>{{ trimform.trimme_size_t }}</label>
+        <label><h4>{% trans 'Bottom' %}</h4>{{ trimform.trimme_size_b }}</label>
+        <label><h4>{% trans 'Right' %}</h4>{{ trimform.trimme_size_r }}</label>
+        <label><h4>{% trans 'Left' %}</h4>{{ trimform.trimme_size_l }}</label>
+        {% if trimform.images.errors %}
+        <div class="error">{{ trimform.images.errors }}</div>
+        {% elif trimform.trimme_size_w.errors %}
+        <div class="error">{{ trimform.trimme_size_w.errors }}</div>
+        {% elif trimform.trimme_size_h.errors %}
+        <div class="error">{{ trimform.trimme_size_h.errors }}</div>
+        {% endif %}
+        <button type="submit" name="action" value="run_trimme" class="action-button">Run</button>
+    </div>
+
+    <div id="remove" class="django">
+        <h3>{% trans 'Remove the background from images or get an alpha mask' %}</h3>
+        {{ removeform.images }}
+        {% if removeform.errors %}
+        <div class="error">{{ removeform.images.errors }}</div>
+        {% endif %}
+        <label><h4>{% trans 'Model' %}</h4>{{ removeform.remove_model }}</label>
+        <label><h4>{% trans 'Only mask' %}</h4>{{ removeform.only_mask }}</label>
+        <label><h4>{% trans 'Alpha Matting' %}</h4>{{ removeform.alpha_matting }}</label>
+        <button type="submit" name="action" value="run_remove" class="action-button">Run</button>
+    </div>
+
+    <div id="resize" class="django">
+        <h3>{% trans 'Resize images and Convert RGBA to RGB' %}</h3>
+        {{ resizeform.images }}
+        <label><h4>{% trans 'Width' %}</h4>{{ resizeform.resize_size_w }}</label>
+        <label><h4>{% trans 'Height' %}</h4>{{ resizeform.resize_size_h }}</label>
+        {% if resizeform.images.errors %}
+        <div class="error">{{ resizeform.images.errors }}</div>
+        {% elif resizeform.resize_size_w.errors %}
+        <div class="error">{{ resizeform.resize_size_w.errors }}</div>
+        {% elif resizeform.resize_size_h.errors %}
+        <div class="error">{{ resizeform.resize_size_h.errors }}</div>
+        {% endif %}
+        <label><h4>{% trans 'Convert RGBA to RGB' %}</h4>{{ resizeform.convert_rgb }}</label>
+        <button type="submit" name="action" value="run_resize" class="action-button">Run</button>
+    </div>
+
+    <div id="colmap" class="django">
+        <h3>{% trans 'Camera parameter estimation and sparse point cloud generation by COLMAP' %}</h3>
+        {{ colmapform.images }}
+        {% if colmapform.images.errors %}
+        <div class="error">{{ imagesform.images.errors }}</div>
+        {% endif %}
+        <button type="submit" name="action" value="run_colmap" class="action-button">Run</button>
+    </div>
+</form>
+</div>
+
+
+<div id="footer">
+    <a href="https://www.instagram.com/tamatama_tech/" target="_blank">Please message me on Instagram if you have any questions or concerns</a>
+    <a>&copy; 2024 Image Batch Processer For NeRF and GSplat or Others</a>
+
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    function showLoader() {
+        document.getElementById("loader").style.display = "block";
+    }
+
+    function hideLoader() {
+        document.getElementById("loader").style.display = "none";
+    }
+
+    // "action-button" クラスを持つすべてのボタンに対してイベントリスナーを追加
+    var buttons = document.getElementsByClassName("action-button");
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener("click", function() {
+            showLoader();
+            // その他の処理...
+        });
+    }
+});
+
+</script>
+<script>
+    window.addEventListener('beforeunload', function(event) {
+        hideLoader();
+    });
+</script>
+</body>
+
+</html>

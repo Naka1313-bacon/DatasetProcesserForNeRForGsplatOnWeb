@@ -1,0 +1,9 @@
+
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+    {% if unique_folder_name %}
+        <a href="{% url 'download_zip' unique_folder_name=unique_folder_name %}">{% trans 'Download' %}</a>
+    {% endif %}
+{% endblock %}
